@@ -119,23 +119,36 @@ particlesJS("particles-js", {
     repeat: 0,
     ease: 'power1.in',
     yoyo: true,
-    delay: 1,
-}) 
+    delay: .5,
+})
 
 function rmvGreeting() {
   gsap.to(".greeting", {
-    delay: .5, duration: 2, opacity: 0, ease: 'power1.in'
+    delay: 4, duration: 2, opacity: 0, ease: 'power1.in'
   })
 
-  function zindex() {
-    const greeting = document.querySelector('.greeting').style.zIndex = '-1';
+  function rmvDiv() {
+    const greeting = document.querySelector('.greeting').style.display = 'none';
   }
 
-  setTimeout(zindex, 2600);
-  
+  setTimeout(rmvDiv, 6000);
 }
 
-setTimeout(rmvGreeting, 3500);
+rmvGreeting();
+
+// Portfolio animation
+
+gsap.from('#name', {delay: 8, duration: 3, scale: 0, ease: "elastic"});
+
+gsap.from('.nav-btn', {delay: 7, duration: 3.5, rotation: 720});
+
+gsap.from('.html-css', {delay: 6, x: -800, y: -800, duration: 3, ease: "power4"});
+
+gsap.from('.js', {delay: 6, x: 800, y: -800, duration: 3, ease: "power4"});
+
+gsap.from('.c', {delay: 6, x: -800, y: 800, duration: 3, ease: "power4"});
+
+gsap.from('.procreate', {delay: 6, x: 800, y: 800, duration: 3, ease: "power4"});
 
 // Name
 
@@ -221,14 +234,14 @@ b.addEventListener(responsive);
 
 // Contacts
 
-const contactBtn = document.querySelector('#contact-btn');
-contactBtn.addEventListener('click', ()=> {
-  Swal.fire({
-    title: 'I appreciate your time!',
-    text: "Your message has been sent. I'll get back to you asap",
-    imageUrl: "thankyou.png",
-    imageWidth: 400,
-    imageHeight: 200,
-    imageAlt: 'Thank You',
-  })
-})
+// const contactBtn = document.querySelector('#contact-btn');
+// contactBtn.addEventListener('click', ()=> {
+//   Swal.fire({
+//     title: 'I appreciate your time!',
+//     text: "Your message has been sent. I'll get back to you asap",
+//     imageUrl: "thankyou.png",
+//     imageWidth: 400,
+//     imageHeight: 200,
+//     imageAlt: 'Thank You',
+//   })
+// })
