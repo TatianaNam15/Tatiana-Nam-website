@@ -1,16 +1,35 @@
 gsap.from('#name', {delay: .5, duration: 3, scale: 0, ease: "elastic"});
 
-gsap.from('.nav-btn', {delay: .5, duration: 3.5, rotation: 720});
-
 // Navigation
 
 const burger = document.querySelector('.nav-btn');
 const navList = document.querySelector('.nav-list');
 
-burger.addEventListener('click', ()=> {
-    burger.classList.toggle('active');
-    navList.classList.toggle('show');
-})
+const openNav = (e) => {
+
+    gsap.from('.uno', {delay: .5, duration: 1, opacity: 0, y: 20});
+    gsap.from('.dos', {delay: 1, duration: 1, opacity: 0, y: 20});
+    gsap.from('.tres', {delay: 1.5, duration: 1, opacity: 0, y: 20});
+    gsap.from('.quatro', {delay: 2, duration: 1, opacity: 0, y: 20});
+
+    const closeNav = (evt) => {
+      if(e !== evt) {
+        navList.classList.toggle('show');
+        burger.classList.toggle('active');
+        
+        document.removeEventListener('click', closeNav);
+      }
+    }
+  
+    if(!navList.classList.contains('show') && !burger.classList.contains('active')) {
+      navList.classList.toggle('show');
+      burger.classList.toggle('active');
+  
+      document.addEventListener('click', closeNav);
+    }
+  }
+  
+  burger.addEventListener('click', openNav);
 
 // Procreate
 
@@ -76,7 +95,7 @@ project.forEach(item => {
         item.classList.add('selected');
     })
 
-    removeClass = () => {
+    function removeClass() {
         project.forEach(item => {
             item.addEventListener('mouseout', () => {
                 item.classList.remove('selected');
