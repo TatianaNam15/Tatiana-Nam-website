@@ -140,8 +140,6 @@ rmvGreeting();
 
 gsap.from('#name', {delay: 8, duration: 3, scale: 0, ease: "elastic"});
 
-gsap.from('.nav-btn', {delay: 7, duration: 3.5, rotation: 720});
-
 gsap.from('.html-css', {delay: 6, x: -800, y: -800, duration: 3, ease: "power4"});
 
 gsap.from('.js', {delay: 6, x: 800, y: -800, duration: 3, ease: "power4"});
@@ -182,66 +180,64 @@ window.addEventListener('scroll', (e) => {
 const burger = document.querySelector('.nav-btn');
 const navList = document.querySelector('.nav-list');
 
-burger.addEventListener('click', ()=> {
-    burger.classList.toggle('active');
+const openNav = (e) => {
+
+  gsap.from('.uno', {delay: .5, duration: 1, opacity: 0, y: 20});
+  gsap.from('.dos', {delay: 1, duration: 1, opacity: 0, y: 20});
+  gsap.from('.tres', {delay: 1.5, duration: 1, opacity: 0, y: 20});
+
+  const closeNav = (evt) => {
+    if(e !== evt) {
+      navList.classList.toggle('show');
+      burger.classList.toggle('active');
+      
+      document.removeEventListener('click', closeNav);
+    }
+  }
+
+  if(!navList.classList.contains('show') && !burger.classList.contains('active')) {
     navList.classList.toggle('show');
-})
+    burger.classList.toggle('active');
+
+    document.addEventListener('click', closeNav);
+  }
+}
+
+burger.addEventListener('click', openNav);
 
 // Sphere animation
 
-const myTags = ['CSS', '*', 'HTML', 'JavaScript', '*', 'VS Code', 'Figma', '*', 'GrrenSock', 'SQL', '*',
-'PL/SQL', 'ProCreate', '*', 'GitHub', 'React', '*', 'C', 'Python', '*', 'Java', 'Linux', '*', 'Oracle'];
+const myTags = ['HTML', 'CSS', '*', 'JavaScript', 'WordPress', '*', 'VS Code', 'Figma', '*', 'GrrenSock', 'SQL', '*',
+'PL/SQL', 'ProCreate', '*', 'Git', 'React', '*', 'C', 'Python', '*', 'Java', 'Linux', '*', 'Oracle'];
 
  let tagCloud = TagCloud('.content', myTags,{
   radius: 300,
-  maxSpeed: 'fase',
+  maxSpeed: 'fast',
   initSpeed: 'fast',
   direction: 135,
   keep: true
 });
 
-function responsive(a) {
-  if (a.matches) {
-    tagCloud = TagCloud('.responsive', myTags,{
-      radius: 240,
-      maxSpeed: 'fase',
-      initSpeed: 'fast',
-      direction: 135,
-      keep: true
-    });
-}
-}
+tagCloud = TagCloud('.responsive-one', myTags,{
+    radius: 240,
+    maxSpeed: 'fast',
+    initSpeed: 'fast',
+    direction: 135,
+    keep: true
+});
 
-function responsive(b) {
-  if (b.matches) {
-    tagCloud = TagCloud('.responsive', myTags,{
-      radius: 180,
-      maxSpeed: 'fase',
-      initSpeed: 'fast',
-      direction: 135,
-      keep: true
-    });
-}
-}
+tagCloud = TagCloud('.responsive-two', myTags,{
+    radius: 185,
+    maxSpeed: 'fast',
+    initSpeed: 'fast',
+    direction: 135,
+    keep: true
+});
 
-let a = window.matchMedia("(max-width: 820px")
-responsive(a);
-a.addEventListener(responsive);
+const certificate = document.querySelectorAll('.certificate');
 
-let b = window.matchMedia("(max-width: 500px)")
-responsive(b);
-b.addEventListener(responsive);
-
-// Contacts
-
-// const contactBtn = document.querySelector('#contact-btn');
-// contactBtn.addEventListener('click', ()=> {
-//   Swal.fire({
-//     title: 'I appreciate your time!',
-//     text: "Your message has been sent. I'll get back to you asap",
-//     imageUrl: "thankyou.png",
-//     imageWidth: 400,
-//     imageHeight: 200,
-//     imageAlt: 'Thank You',
-//   })
-// })
+certificate.forEach(item => {
+  item.addEventListener('click', ()=> {
+    item.classList.toggle('zoom');
+  })
+})
